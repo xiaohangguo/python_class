@@ -1,0 +1,152 @@
+import abc
+import math
+
+
+# class All_file(metaclass=abc.ABCMeta):
+#     all_file = 'file'
+#
+#     @abc.abstractmethod
+#     def read(self):
+#         # implement read operation
+#         pass
+#
+#     @abc.abstractmethod
+#     def write(self, data=None):
+#         # implement write operation
+#         pass
+#
+#
+# class Txt(All_file):
+#     def __init__(self, name):
+#         self.name = name
+#         self.type = 'input/output'
+#
+#     def read(self):
+#         print('This is a txt file,reading from the%s file now,' % self.name)
+#
+#     def write(self, date):
+#         print('write %s to %s file ' % (date, self.name))
+#
+#
+# f1 = Txt('abc.txt')
+# f1.read()
+# f1.write('Hello World,')
+#
+#
+# class Stdin(All_file):
+#     def __init__(self):
+#         self.name = 'keyboard'
+#         self.type = 'input'
+#
+#     def read(self):
+#         pass
+#
+#     def write(self, data=None):
+#         x = input('please input:')
+#         return x
+#
+#
+# f2 = Stdin()
+# a = f2.write()
+# print(a)
+
+#
+# class Stdout(All_file):
+#     def __init__(self):
+#         self.name = 'screen'
+#         self.type = 'read'
+#
+#     def read(self):
+#         print('reading %s now' % self.name)
+#
+#     def write(self, data=None):
+#         pass
+
+#
+# f3 = Stdout()
+# b = f3.read()
+
+
+# class Course(All_file):
+class Graphics(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def translate(self, dx, dy):
+        # 完成平移操作
+        pass
+
+    @abc.abstractmethod
+    def rotate(self, angle):
+        # 完成绕远点旋转
+        pass
+
+    @abc.abstractmethod
+    def show(self):
+        # 完成显示图像信息
+        pass
+
+
+class Point(Graphics):
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+
+    def translate(self, dx, dy):
+        self.__x += dx
+        self.__y += dy
+
+    def rotate(self, angle):
+        x = angle * math.pi / 180
+        tx = self.__x * math.cos(x) - self.__y * math.sin(x)
+        ty = self.__x * math.sin(x) + self.__y * math.cos(x)
+        self.__x, self.__y = tx, ty
+
+    def show(self):
+        print('Porint(%r,%r)' % (self.__x, self.__y))
+
+    def getx(self):
+        return self.__x
+
+    def gety(self):
+        return self.__y
+
+
+p1 = Point(3, 5)
+p1.show()
+p1.translate(2, 3)
+p1.show()
+p1.rotate(30)
+p1.show()
+class Line(Graphics):
+
+    def __init__(self,p1,p2):
+        if not isinstance(p1,Point) or not isinstance(p2,Point):
+            raise ('ParamErrors')
+        self.__p1=p1
+        self.__p2=p2
+    def translate(self, dx, dy):
+        self.__p1.translate(dx,dy)
+        self.__p2.translate(dx,dy)
+    def rotate(self, angle):
+        self.__p1.rotate(angle)
+        self.__p2.rotate(angle)
+    def show(self):
+        dy =self.__p2.gety()-self.__p1.gety()
+        dx = self.__p2.getx()-self.__p1.getx()
+        if dx != 0:
+            k  = dy/dx
+            b = self.__p1.gety()-k*self.__p1.getx()
+            print("Line(y=%rx+%r)"%(k,b))
+        else:
+            print("Line(x=%r)"%self.__p2.getx())
+p2 = Point(1,3)
+l1 = Line(p1,p2)
+l1.show()
+l1.rotate(45)
+l1.show()
+def translate(obj,dx,dy):
+    t = obj
+    t.translate(dx,dy)
+    return t
+p1.show()
+translate(p1,1,1).show()
+translate(l1,1,1).show()
