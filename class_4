@@ -1,0 +1,173 @@
+'Tom', (0, 13)
+'lcx', (512, 13)
+'xiaolin', (1024, 13)
+
+���,ѧ��,��ѧ,����
+1,1910110139,60,76
+2,1910140002,60,54
+3,1910150013,65,95
+4,1910150034,79,78
+5,1910150069,94,88
+6,1910150077,44,95
+7,1910410099,63,71
+8,1910420022,62,65
+9,1910420051,52,64
+10,1910420086,51,76
+11,1910430049,64,70
+12,1910430059,45,60
+13,1910430062,61,36
+14,1910430089,77,71
+15,1910430165,73,93
+16,1910610012,70,75
+17,1910620035,54,76
+18,1910630001,70,68
+19,1910630021,48,75
+20,1910640085,84,79
+21,1910650056,93,44
+22,1910710029,75,50
+23,1910710059,76,77
+24,1910720032,68,78
+
+# Automatically created by: scrapy startproject
+#
+# For more information about the [deploy] section see:
+# https://scrapyd.readthedocs.io/en/latest/deploy.html
+
+[settings]
+default = my.settings
+
+[deploy]
+#url = http://localhost:6800/
+project = my
+
+ ������ C �еľ�û�б�ǩ��
+ �������к��� A80B-75CA
+
+ C:\Users\Administrator\my\my\spiders ��Ŀ¼
+
+2021/12/14  16:26    <DIR>          .
+2021/12/14  16:26    <DIR>          ..
+2021/12/14  16:26                 0 data.txt
+2020/05/18  12:09               223 itcast.py
+2020/05/18  12:05               161 __init__.py
+2020/05/18  12:15    <DIR>          __pycache__
+               3 ���ļ�            384 �ֽ�
+               3 ��Ŀ¼ 17,357,680,640 �����ֽ�
+
+def count_char(file):
+    red={}
+    with open(file) as fp :
+        a = fp.read().replace(' ','').replace("\n",'')
+        for item in a:
+            if item in red:
+                red[item]+=1
+            else:
+                red[item]=1
+        l = list(red.items())
+        l.sort(key=lambda x:x[1],reverse= True)
+        for i in range(50):
+            print(l[i])
+count_char('data.txt')
+
+def wc(file):
+    count = {}
+    line_count = 0
+    word_count =0
+    char_count = 0
+    with open(file) as fp:
+        for line in fp:
+            words = line.split()
+            for word in words:
+                if word in count:
+                    count[word]+=1
+                else:
+                    count[word]=1
+            line_count+=1
+            word_count+=len(word)
+            char_count+=len(line)
+    print('行数',line_count)
+    print('单词数',word_count)
+    print('字符数',char_count)
+with open('roll_book.csv')as fp:
+    print(fp.read())
+with open('roll_book.csv') as fp:
+    for line in fp:
+        line = line.split(',')
+        print(line)
+with open('roll_book.csv')as fp:
+    for line in fp:
+        line = line.split(',')
+        print('{},{},{},{}'.format(line[0],line[1],line[2],line[3]),end='')
+# grade = {}
+# with open('roll_book.csv') as fp:
+#     b = fp.read()
+#     for item in b:
+#         list = [item]
+#     list.sort()
+#     print(list)
+def max_min_average(score):
+    max_ = max(score)
+    min_ = min(score)
+    avg_=sum(score)/len(score)
+    return (max_,min_,avg_)
+
+import matplotlib.pyplot as plt
+def histogram(scores,start=30,sep=10):
+    hist={}
+    for i in range(start,101,sep):
+        hist[i] = 0
+    for i in scores:
+        t = (i+10) - (i%10)
+        hist[t]+=1
+    values = hist.values()
+    plt.figure(figsize=(6,5))
+    plt.bar(range(start-5,101,sep),values,width = 5,color='red')
+    plt.show()
+
+def analysis(file):
+    with open(file) as fp:
+        math,physics = [] , []
+        fp.readline()
+        for line in fp:
+            line = line.split(',')
+            math.append(int(line[3]))
+            tmp = line[3].split("\n")
+            physics.append(int(tmp[0]))
+        max_,min_,avg_ = max_min_average(math)
+        print('数学最高分：',max_)
+        print('数学最低分：', min_)
+        print('数学平均分：{:.2f}'.format(avg_))
+        max_,min_,avg_ = max_min_average(physics)
+        print('物理最高分：',max_)
+        print('物理最低分：', min_)
+        print('物理平均分：{:.2f}'.format(avg_))
+        histogram(math)
+        histogram(physics)
+analysis('roll_book.csv')
+import shelve
+def register(name,passwd):
+    with shelve.open('passwd')as fp:
+        if name in fp:
+            print('用户名重名')
+        else:
+            fp[name]=hash(passwd)
+def show():
+    with shelve.open('passwd')as fp :
+        for item in fp.items():
+            print(item)
+register('Tom','123456')
+register('lcx','abcdef')
+register('xiaolin','123abc')
+show()
+def login(name,passwd):
+    with shelve.open('passwd')as fp:
+        dict1 = {}
+        for item in fp.items():
+            dict1.update(item[0],item[1])
+        #print(dict1)
+        if passwd ==dict1.pop(name):
+            print('登录成功')
+
+'Tom', (0, 13)
+'lcx', (512, 13)
+'xiaolin', (1024, 13)
