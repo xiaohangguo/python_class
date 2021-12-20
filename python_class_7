@@ -1,0 +1,57 @@
+# with open('abc.txt') as fp:
+#     print(fp.read())
+import math
+
+# try:
+#     with open('abc.txt') as fp:
+#         print(fp.read())
+# except FileNotFoundError:
+#     print('abc.txt is not found.')
+# with open('abc.txt','w') as fp:
+#     fp.write('Hello world.')
+#
+# try:
+#     with open('abc.txt','x') as fp:
+#         fp.write('Good Luck.')
+# except FileExistsError:
+#     print('abc.txt has existed.')
+#     # try except finally
+# def div(x,y):
+#     try:
+#         result = x/y
+#     except ZeroDivisionError:
+#         print('division by zero ')
+#     else:
+#         print(result)
+# div(1,0)
+# div(1,1)
+# def  my(level):
+#     if level<1:
+#         raise ValueError('Ivalid level')
+#
+# try:
+#     x = input('x=')
+#     my(x)
+# except ValueError as e:
+#     try:
+#         my(x)
+#     except ValueError as e:
+#         print(repr(x))
+def caculate(a,b,c):
+    dert = b ** 2 - 4 * a * c
+    x1 = (-b + math.sqrt(dert)) / (2 * a)
+    x2 = (-b - math.sqrt(dert)) / (2 * a)
+    return x1,x2
+try:
+    caculate(1,2,3)
+except TypeError as e:
+    pass
+except ValueError as e:
+    print("dert 为负数，两根为虚数")
+
+    # except a ==0 :
+    #     print('a 如果为零，则为一次函数')
+    # except dert <0 :
+    #     print('判别式为负数 两根为虚数')
+    # else:
+#print(caculate(1,2,3))
