@@ -1,0 +1,83 @@
+import numpy as np
+import matplotlib.pyplot as plt
+def windows():
+    plt.figure(figsize=(10,6))
+    t = np.arange(0.0,4*np.pi,0.2)
+    s = np.sin(t)
+    s1 = np.sin(t/2)
+    s2 = np.sin(2*t)
+    s3 = np.cos(t)
+ #   s4 = np.tan(t)
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('y=sin(x)')
+    plt.rcParams['lines.marker'] = '+'
+    plt.rcParams['lines.linestyle']= '-.'
+    plt.plot(t,s)
+    plt.rcParams['lines.marker'] = 'o'
+    plt.rcParams['lines.linestyle']= '-'
+    plt.plot(t,s1)
+    plt.rcParams['lines.marker'] = '*'
+    plt.rcParams['lines.linestyle']= ':'
+    plt.plot(t,s2)
+    plt.rcParams['lines.marker'] = ','
+    plt.rcParams['lines.linestyle']= '-'
+
+    plt.plot(t,s3)
+ #   plt.plot(t,s4)
+    plt.legend(['y=sin(x)','y=sin(t/2)','y= sin(2t)','y=cos(t)','y=tan(t)'])
+    plt.show()
+
+def windows2():
+    plt.figure(figsize=(10,10))
+    x1 = np.arange(0.00,2.25,0.2)
+    y1 = x1
+    y2 = x1**2
+    y3 = x1**3
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.title('Simple Plot')
+    plt.rcParams['lines.marker']='+' #jiedian
+    plt.rcParams['lines.linestyle'] = '-.' #xiantiao
+    plt.plot(x1,y1)
+    plt.rcParams['lines.marker']='*'
+    plt.rcParams['lines.linestyle'] = '-'
+    plt.plot(x1,y2)
+    plt.rcParams['lines.marker'] = 'o'
+    plt.rcParams['lines.linestyle'] = ':'
+    plt.plot(x1,y3)
+    plt.legend(['y=x','y=x**2','y=x**3'])
+    plt.show()
+def windows3():
+    plt.figure(figsize=(10,10))
+    ax1 = plt.subplot(2,2,1)
+    ax2 = plt.subplot(2,2,2)
+    ax3 = plt.subplot(2,1,2)
+    x1 = np.arange(0.00,2.25,0.2)
+    y1 = x1
+    y2 = x1**2
+    y3 = x1**3
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.rcParams['lines.marker']='h'
+    plt.rcParams['lines.linestyle'] = '-'
+    plt.sca(ax1)
+    plt.plot(x1,y1,color='red')
+    plt.title('y=x')
+    plt.rcParams['lines.marker']='*'
+    plt.rcParams['lines.linestyle'] = '-'
+    plt.legend(['y=x'])
+    plt.sca(ax2)
+    plt.plot(x1, y2, color='blue')
+    plt.title('y=x**2')
+    plt.plot(x1,y2)
+    plt.legend(['y=x**2'])
+    plt.rcParams['lines.marker'] = 'o'
+    plt.rcParams['lines.linestyle'] = ':'
+    plt.sca(ax3)
+    plt.title('y=x**3')
+    plt.plot(x1,y3,color='green')
+    plt.legend(['y=x**3'])
+    plt.show()
+windows2()
+windows3()
